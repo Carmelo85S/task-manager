@@ -51,7 +51,14 @@ const App = () => {
 
   return (
     <main>
-      <div>
+        <div className="title-container">
+          <h1 className="heading">
+            Lazy List
+          </h1>
+          <p className="quote">
+            Get things done...or at least pretend to
+          </p>
+        </div>
         <form onSubmit={handleFormSubmit}>
           <input
             type="text"
@@ -90,7 +97,7 @@ const App = () => {
                     <span>{task.task}</span>
                   )}
                   <div className="btn-container">
-                    <button onClick={() => handleEdit(index)}>Edit</button>
+                  <button onClick={() => handleEdit(index)}>Edit</button>
                     <button onClick={handleSaveEdit}>Save</button>
                     <button onClick={() => handleDelete(task.task)}>Delete</button>
                     
@@ -108,7 +115,6 @@ const App = () => {
             </ul>
           )}
         </div>
-      </div>
     </main>
   );
 };

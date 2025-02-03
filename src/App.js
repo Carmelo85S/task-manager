@@ -80,7 +80,13 @@ var App = function App() {
     updatedTasks[index].completed = !updatedTasks[index].completed;
     setTasks(updatedTasks);
   };
-  return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("div", {
+    className: "title-container"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "heading"
+  }, "Lazy List"), /*#__PURE__*/React.createElement("p", {
+    className: "quote"
+  }, "Get things done...or at least pretend to")), /*#__PURE__*/React.createElement("form", {
     onSubmit: handleFormSubmit
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
@@ -131,6 +137,6 @@ var App = function App() {
         return handleCheckboxChange(index);
       }
     }))));
-  })))));
+  }))));
 };
 var _default = exports.default = App;

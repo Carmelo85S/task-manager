@@ -7,84 +7,111 @@ body {
     color: variable.$text-color;
     @include flexbox(center, center, column);
     min-height: 100vh;
-    padding: 20px;
+    padding: 0px;
 }
 
 main {
-    @include container(600px, auto, 100%);
+    @include container(600px, 200px, 100%);
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
-// Form di input
-form {
-    @include flexbox(center, center, row);
-    gap: 10px;
-    margin-bottom: 20px;
-}
+    .title-container{
+        text-align: center;
+        .heading{
+            font-size:50px;
+            margin: 10px auto;
+        }
 
-input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-    transition: border 0.3s ease-in-out;
+        .quote{
+            margin-top: 0px;
+            font-size:15px;
+            letter-spacing: 1.5px;
+            color:rgb(187, 187, 187);
+        }
 
-    &:focus {
-        border-color: #3498db;
+    }
+
+    form {
+        @include flexbox(center, center, row);
+        gap: 10px;
+        margin-bottom: 20px;
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s ease-in-out;
+        
+            &:focus {
+                border-color: #3498db;
+            }
+        }
+
+        button {
+            @include button();
+        }
+    }
+
+    .task-list-container {
+        list-style: none;
+        padding: 0;
+
+        .task {
+            background-color: variable.$task-bg;
+            color: variable.$text-color;
+            padding: 12px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s;
+        
+            &.completed {
+                background-color: variable.$task-completed-bg;
+                color: white;
+                text-decoration: line-through;
+            }
+
+            .btn-container {
+                @include flexbox(space-between, center, row);
+                gap: 10px;
+            
+                button {
+                    @include button();
+                }
+            
+                button.delete {
+                    @include button(#e74c3c);
+                }
+                
+                button.edit {
+                    @include button(#f1c40f, #333);
+                }
+            
+                .checkbox-container {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+            
+                    label {
+                        font-size: 14px;
+                    }
+            
+                    input[type="checkbox"] {
+                        transform: scale(1.2);
+                    }
+                }
+            }
+            
+        }
     }
 }
 
-button {
-    @include button();
-}
 
-// Task List
-.task-list-container {
-    list-style: none;
-    padding: 0;
-}
-
-.task {
-    background-color: variable.$task-bg;
-    color: variable.$text-color;
-    padding: 12px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: background-color 0.3s;
-
-    &.completed {
-        background-color: variable.$task-completed-bg;
-        color: white;
-        text-decoration: line-through;
-    }
-}
-
-.btn-container {
-    display: flex;
-    gap: 5px;
-
-    .checkbox-container{
-        @include flexbox;
-    }
-}
-
-button.delete {
-    @include button(#e74c3c);
-}
-
-button.edit {
-    @include button(#f1c40f, #333);
-}
-
-input[type="checkbox"] {
-    transform: scale(1.2);
-}
