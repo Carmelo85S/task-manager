@@ -1,0 +1,36 @@
+@mixin flexbox($justify-content: center, $align-items: center, $flex-direction: column) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    flex-direction: $flex-direction;
+}
+
+@mixin container($max-width: 100vw, $min-height: 100vh, $width: 100%) {
+    max-width: $max-width;
+    min-height: $min-height;
+    width: $width;
+    margin: auto;
+}
+
+@mixin button($bg-color: #348ddb, $text-color: #ececec, $padding: 10px 25px, $border-radius: 5px) {
+    display: inline-block;
+    background-color: $bg-color;
+    color: $text-color;
+    padding: $padding;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+
+    &:hover {
+        background-color: #3453db;
+        transform: scale(1.05);
+    }
+
+    &:active {
+        background-color: #05256f;
+        transform: scale(0.98);
+    }
+}
