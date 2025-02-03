@@ -1,27 +1,45 @@
 import { useState } from "react";
-
+import './index.css';
 const App = () => {
 
-  //declaring task list and input field
-  const [tasks, setTasks] = useState<{task:string, completed: boolean}[]>([]);
+  // Declaring task list and input field
+  const [tasks, setTasks] = useState<{ task: string, completed: boolean }[]>([]);
   const [inputTask, setInputTask] = useState<string>("");
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editingTask, setEditingTask] = useState<string>("");
 
-  //setInputTask take the insert value from the input
+  // Handle input for new task
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTask(e.target.value);
   };
 
-  //Prevent empty task, add task to array and clean the input
+  // Prevent empty task, add task to array, and clean the input
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputTask.trim() === "") return;
-    setTasks([...tasks, {task: inputTask, completed: false }]); 
-    setInputTask(""); 
+    setTasks([...tasks, { task: inputTask, completed: false }]);
+    setInputTask("");
   };
 
   // Remove specific task
   const handleDelete = (toDelete: string) => {
     setTasks(tasks.filter((task) => task.task !== toDelete));
+  };
+
+  // Handle task edit mode
+  const handleEdit = (index: number) => {
+    setEditingIndex(index);
+    setEditingTask(tasks[index].task);
+  };
+
+  // Save the edited task
+  const handleSaveEdit = () => {
+    if (editingTask.trim() === "") return;
+    const updatedTasks = [...tasks];
+    updatedTasks[editingIndex!].task = editingTask;
+    setTasks(updatedTasks);
+    setEditingIndex(null);
+    setEditingTask("");
   };
 
   // Handle task completion toggle
@@ -32,8 +50,8 @@ const App = () => {
   };
 
   return (
-    <main>
-      <h1>Task Manager</h1>
+    <main className="main">
+      <h1 className="main-title">Task Manager</h1>
       <form onSubmit={handleFormSubmit}>
         <input
           type="text"
@@ -51,7 +69,7 @@ const App = () => {
       {tasks.length > 0 && (
         <ul>
           {tasks.map((task, index) => (
-            <li 
+            <li
               key={index}
               style={{
                 backgroundColor: task.completed ? "green" : "transparent",
@@ -61,13 +79,22 @@ const App = () => {
                 borderRadius: "4px",
               }}
             >
-              {task.task}
+              {editingIndex === index ? (
+                <div>
+                  <input
+                    type="text"
+                    value={editingTask}
+                    onChange={(e) => setEditingTask(e.target.value)}
+                  />
+                  <button onClick={handleSaveEdit}>Save</button>
+                </div>
+              ) : (
+                <span>{task.task}</span>
+              )}
               <button onClick={() => handleDelete(task.task)}>Delete</button>
-              <button onClick={() => handleDelete(task.task)}>Edit</button>
-              <input 
-                type="checkbox" 
-                name="completed" 
-                id="completed"
+              <button onClick={() => handleEdit(index)}>Edit</button>
+              <input
+                type="checkbox"
                 checked={task.completed}
                 onChange={() => handleCheckboxChange(index)}
               />
