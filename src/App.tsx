@@ -50,8 +50,7 @@ const App = () => {
   };
 
   return (
-    <main className="main">
-      <h1 className="main-title">Task Manager</h1>
+    <main>
       <form onSubmit={handleFormSubmit}>
         <input
           type="text"
