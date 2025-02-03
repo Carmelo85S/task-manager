@@ -12,10 +12,10 @@ body {
 
 main {
     @include container(600px, 200px, 100%);
-    background: white;
+    background: rgb(246, 246, 246);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 
     .title-container{
         text-align: center;
@@ -77,6 +77,20 @@ main {
                 background-color: variable.$task-completed-bg;
                 color: white;
                 text-decoration: line-through;
+            }
+
+            input[type="text"] {
+                flex: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                outline: none;
+                transition: border 0.3s ease-in-out;
+            
+                &:focus {
+                    border-color: #3498db;
+                }
             }
 
             .btn-container {
