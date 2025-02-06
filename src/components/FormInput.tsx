@@ -1,35 +1,39 @@
-import React from 'react'
-
-
-const FormInput = (setTasks, inputTask, setInputTask) => {
-
-    // Handle input for new task
-    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputTask(e.target.value);
+const FormInput = ({ newTask, setNewTask, setTasks, tasks }: {
+    newTask: string;
+    setNewTask: React.Dispatch<React.SetStateAction<string>>;
+    setTasks: React.Dispatch<React.SetStateAction<{
+        task: string;
+        completed: boolean;
+    }[]>>
+    tasks: { task: string; completed: boolean }[];
+  }) => {
+  
+    const handleTaskSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (newTask.trim() === "") return;
+      setTasks([...tasks, { task: newTask, completed: false }]);
+      setNewTask("");
     };
-
-    // Prevent empty task, add task to array, and clean the input
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (inputTask.trim() === "") return;
-        setTasks([...tasks, { task: inputTask, completed: false }]);
-        setInputTask("");
+  
+    const handleNewTaskChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setNewTask(e.target.value);
     };
-
+  
     return (
-        <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleTaskSubmit}>
         <input
-        type="text"
-        name="task"
-        id="task"
-        placeholder="Insert task"
-        value={inputTask}
-        onChange={handleInput}
-        required
+          type="text"
+          name="task"
+          id="task"
+          placeholder="Insert task"
+          value={newTask}
+          onChange={handleNewTaskChange}
+          required
         />
-        <button type="submit">Submit Task</button>
-    </form>
-    )
-}
-
-export default FormInput
+        <button type="submit">Add Task</button>
+      </form>
+    );
+  };
+  
+  export default FormInput;
+  

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './index.css';
+import FormInput from "./components/FormInput";
 
 const App = () => {
   const [tasks, setTasks] = useState<{ task: string, completed: boolean }[]>([]);
@@ -7,16 +8,6 @@ const App = () => {
   const [taskEdit, setTaskEdit] = useState<number | null>(null);
   const [editedTaskText, setEditedTaskText] = useState<string>("");
 
-  const handleNewTaskChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTask(e.target.value);
-  };
-
-  const handleTaskSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (newTask.trim() === "") return;
-    setTasks([...tasks, { task: newTask, completed: false }]);
-    setNewTask("");
-  };
 
   const removeTask = (taskToRemove: string) => {
     setTasks(tasks.filter(task => task.task !== taskToRemove));
@@ -49,18 +40,13 @@ const App = () => {
         <p className="quote">Get things done... or at least pretend to</p>
       </div>
       
-      <form onSubmit={handleTaskSubmit}>
-        <input
-          type="text"
-          name="task"
-          id="task"
-          placeholder="Insert task"
-          value={newTask}
-          onChange={handleNewTaskChange}
-          required
-        />
-        <button type="submit">Add Task</button>
-      </form>
+      <FormInput 
+        newTask={newTask} 
+        setNewTask={setNewTask}
+        tasks={tasks} 
+        setTasks={setTasks}
+      />
+
 
       <div>
         {tasks.length > 0 && (
