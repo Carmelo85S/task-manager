@@ -1,23 +1,22 @@
-const FormInput = ({ newTask, setNewTask, setTasks, tasks }: {
-    newTask: string;
-    setNewTask: React.Dispatch<React.SetStateAction<string>>;
-    setTasks: React.Dispatch<React.SetStateAction<{
-        task: string;
-        completed: boolean;
-    }[]>>
-    tasks: { task: string; completed: boolean }[];
-  }) => {
+import {InputProps} from "../interface/InputProps";
+
+const FormInput = ({
+  newTask,
+  setNewTask,
+  setTasks,
+  tasks,
+}: InputProps) => {
   
-    const handleTaskSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (newTask.trim() === "") return;
-      setTasks([...tasks, { task: newTask, completed: false }]);
-      setNewTask("");
-    };
+  const handleTaskSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newTask.trim() === "") return;
+    setTasks([...tasks, { task: newTask, completed: false }]);
+    setNewTask("");
+  };
   
-    const handleNewTaskChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setNewTask(e.target.value);
-    };
+  const handleNewTaskChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTask(e.target.value);
+  };
   
     return (
       <form onSubmit={handleTaskSubmit}>
