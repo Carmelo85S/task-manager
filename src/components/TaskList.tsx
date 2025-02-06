@@ -1,20 +1,14 @@
-interface TaskListProps {
-    tasks: { task: string; completed: boolean }[];
-    setTasks: React.Dispatch<React.SetStateAction<{ task: string; completed: boolean }[]>>;
-    taskEdit: number | null;
-    setTaskEdit: React.Dispatch<React.SetStateAction<number | null>>;
-    editedTaskText: string;
-    setEditedTaskText: React.Dispatch<React.SetStateAction<string>>
-  }
+import { TaskListProps } from "../interface/TaskListProps";
+
   
-  const TaskList: React.FC<TaskListProps> = ({
-    tasks,
-    setTasks,
-    taskEdit,
-    setTaskEdit,
-    editedTaskText,
-    setEditedTaskText,
-  }) => {
+const TaskList = ({
+  tasks,
+  setTasks,
+  taskEdit,
+  setTaskEdit,
+  editedTaskText,
+  setEditedTaskText,
+}: TaskListProps) => {
 
     const removeTask = (taskToRemove: string) => {
         setTasks(tasks.filter(task => task.task !== taskToRemove));
